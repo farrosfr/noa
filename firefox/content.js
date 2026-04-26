@@ -5,7 +5,7 @@
 
     // Fetch the dynamic rules from the extension dashboard
     chrome.storage.local.get(['blockedKeywords', 'excludedDomains', 'redirectUrl'], (data) => {
-        const rawKeywords = data.blockedKeywords || 'lk21, indoxxi, film semi';
+        const rawKeywords = data.blockedKeywords || 'lk21, indoxxi, film semi, dramacool';
         const rawDomains = data.excludedDomains || 'farros.co, google.com';
         const targetURL = data.redirectUrl || 'https://www.youtube.com/watch?v=fbTlW1V2VuI';
 

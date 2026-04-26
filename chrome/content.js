@@ -19,7 +19,7 @@
     if (window.top !== window.self) return;
 
     // --- Core Guardrail Logic ---
-    const badKeywords = /lk21|dunia21|layarkaca21|layartancap21|rebahin|idlix|bos21|indoxx1|indoxxi|film semi|nonton semi/i;
+    const badKeywords = /lk21|dunia21|layarkaca21|layartancap21|rebahin|idlix|bos21|indoxx1|indoxxi|film semi|nonton semi|dramacool/i;
     const targetURL = "https://www.youtube.com/watch?v=fbTlW1V2VuI&t=2726s";
 
     function enforceRedirect() {
