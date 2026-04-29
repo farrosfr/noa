@@ -5,8 +5,8 @@
 
     // Fetch the dynamic rules from the extension dashboard
     chrome.storage.local.get(['blockedKeywords', 'excludedDomains', 'redirectUrl'], (data) => {
-        const rawKeywords = data.blockedKeywords || 'lk21, indoxxi, film semi, dramacool';
-        const rawDomains = data.excludedDomains || 'farros.co, google.com';
+        const rawKeywords = data.blockedKeywords || 'lk21, indoxxi, film semi, dramacool, vivamax, pinoy cinema';
+        const rawDomains = data.excludedDomains || 'farros.co, google.com, medium.com';
         const targetURL = data.redirectUrl || 'https://www.youtube.com/watch?v=fbTlW1V2VuI';
 
         // 1. Process Exclusions
@@ -34,7 +34,13 @@
             window.location.replace(targetURL);
         }
 
-        // 4. Surveillance
+        // 4. Immediate URL check
+        if (badKeywords.test(window.location.href)) {
+            enforceRedirect();
+            return;
+        }
+
+        // 5. Surveillance
         const observer = new MutationObserver((mutations, obs) => {
             if (document.title && badKeywords.test(document.title)) {
                 obs.disconnect();

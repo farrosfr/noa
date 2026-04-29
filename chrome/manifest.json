@@ -3,8 +3,12 @@
   "name": "Content Guardrail",
   "version": "1.0",
   "description": "Enforces corporate content policies.",
-  "permissions": ["scripting"],
+  "permissions": ["storage"],
   "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Configure Content Guardrail"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
