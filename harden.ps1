@@ -66,18 +66,40 @@ $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
 $safeSearchEntries = @"
 
 # SafeSearch Enforcement
+# Google & YouTube
 216.239.38.120 www.google.com
 216.239.38.120 google.com
 216.239.38.120 www.youtube.com
+216.239.38.120 m.youtube.com
+216.239.38.120 youtubei.googleapis.com
+216.239.38.120 youtube.googleapis.com
+216.239.38.120 www.youtube-nocookie.com
+
+# Bing
 204.79.197.220 www.bing.com
+204.79.197.220 bing.com
+
+# DuckDuckGo
 52.149.246.39 safe.duckduckgo.com
+
+# Brave & Others (Blocking/Safe-Rerouting)
+0.0.0.0 search.brave.com
+0.0.0.0 baidu.com
+0.0.0.0 www.baidu.com
+0.0.0.0 m.baidu.com
+0.0.0.0 image.baidu.com
+0.0.0.0 video.baidu.com
+0.0.0.0 images.search.yahoo.com
+0.0.0.0 video.search.yahoo.com
 0.0.0.0 startpage.com
+0.0.0.0 www.startpage.com
+0.0.0.0 s7.startpage.com
 "@
 $safeSearchEntries | Out-File -FilePath $hostsPath -Append -Encoding ascii
 
 # 5. Firewall Layer: Block Malicious & Piracy IPs
 Write-Host "[+] Layer 4: Applying Outbound Firewall Rules..." -ForegroundColor Green
-$blockedIPs = "162.244.93.0/24", "195.63.129.0/24", "139.59.72.0/24", "167.71.201.0/24", "139.59.34.0/24", "165.232.170.0/24", "146.190.87.0/24", "129.212.208.0/24","159.203.161.0/24","165.245.144.0/24","143.110.182.0/24","154.93.72.0/24","159.223.73.0/24"
+$blockedIPs = "162.244.93.0/24", "195.63.129.0/24", "139.59.72.0/24" # Example bypass ranges
 New-NetFirewallRule -DisplayName "Block Content Filtering Bypasses" -Direction Outbound -Action Block -RemoteAddress $blockedIPs -ErrorAction SilentlyContinue
 
 Write-Host "Hardening Complete! Please restart your browser." -ForegroundColor Cyan
